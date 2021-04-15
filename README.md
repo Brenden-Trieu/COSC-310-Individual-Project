@@ -69,3 +69,27 @@ I watch hockey
 
                                                           Who is your favourite hockey player?
 
+Wikipedia API was implemented as part of the individual project.  The wikipedia API allows the chatbot to search for a user inputted phrase in the wikipedia database and respond with a definition for the phrase.  To utilize the function the user must type ": " (colon then space) to indicate to the chatbot that the following input is to be defined.  The chatbot will then respond with a maximum of two sentences defining the phrase inputted after the colon and space.
+
+Example:
+
+: hockey
+
+                                                          Hockey is a sport in which two teams play against each other by trying to manoeuvre a ball or a puck into the opponent's goal using a hockey stick. There are many types of hockey such as bandy, field hockey, ice hockey and rink hockey.
+                                            
+: fruit loops                            
+
+                                                          Froot Loops is a brand of sweetened, fruit-flavored breakfast cereal produced by Kellogg's and sold in many countries. The cereal pieces are ring-shaped (hence "loops") and come in a variety of bright colors and a blend of fruit flavors (hence "froot", a cacography of fruit).
+
+Google Translate API
+
+Example:
+
+\# how are you
+
+                                                          Comment allez-vous
+                                            
+我的名字是詹姆斯                           
+
+                                                          你好詹姆斯，我叫体育机器人。你玩什么运动
+

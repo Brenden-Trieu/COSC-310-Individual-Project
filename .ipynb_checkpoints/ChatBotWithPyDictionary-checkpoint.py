@@ -243,6 +243,7 @@ makeMenu()
 pairs = [
     ['Hello|Hi', ['Hi, what is your name?']],
     ['Can you define something for me?', ['Yes I can, just type a colon then add a space, then with the next words you type I will search the Wikipedia database for a definition']],
+    ['Can you translate something for me?', ['Yes I can, just type a octothorpe/pound/hastag symbol then add a space, then with the next phrase you type I will translate it to french. Alternatively you can also just type in whatever language and I can adapt my responses to that language']],
     ['my name is (.*)', ['Hello %1, my name is sports bot. Do you play any sports']],
     ['(.*) play (.*)', ['Thats so cool! I used to play %2 as well. Do you watch %2?']],
     ['yes, i watch (.*)', ['Who is your favourite player?']],

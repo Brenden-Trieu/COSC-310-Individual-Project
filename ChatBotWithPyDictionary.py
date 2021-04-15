@@ -1,6 +1,7 @@
 import nltk
 import tkinter
 import string
+import wikipedia
 from tkinter import *
 from nltk.chat.util import Chat, reflections
 from nltk.tokenize import word_tokenize
@@ -11,6 +12,7 @@ nltk.download('wordnet')
 nltk.download('averaged_perceptron_tagger')
 from nltk import word_tokenize
 from PyDictionary import PyDictionary
+from googletrans import Translator
 
 
 
@@ -54,7 +56,27 @@ def checkForCurrency(userInput):
             truth = True
     return truth
 
+#Wikipedia check
+def checkForColon(userInput):
+    userInput = nltk.word_tokenize(userInput)
+    userInput = nltk.pos_tag(userInput)
+    truth = False
+    for i in range(len(userInput)):
+        a = userInput[i]
+        if (a[1] == ':'):
+            truth = True
+    return truth
 
+#Google translate check
+def checkForOcto(userInput):
+    userInput = nltk.word_tokenize(userInput)
+    userInput = nltk.pos_tag(userInput)
+    truth = False
+    for i in range(len(userInput)):
+        a = userInput[i]
+        if (a[1] == '#'):
+            truth = True
+    return truth
 # method to check for year inputs
 
 def checkForNum(userInput):
@@ -134,11 +156,17 @@ def tryConverseWithSynonyms(userIn):
 def sendClick():
     userInput = mesWin.get("1.0", END)
     userInput = userInput
+    translator = Translator()
+    translated = translator.translate(userInput, dest='en')
+    userInput = translated.text
+    OGlang = translated.src
     text = word_tokenize(userInput)
     print(nltk.pos_tag(text))
     words = nltk.pos_tag(text)    
     userInput = addComma(userInput)
     mesWin.delete("1.0", END)
+    flag = checkForColon(userInput)
+    trigger = checkForOcto(userInput)
     truth = checkForCurrency(userInput)
     truth1 = checkForNum(userInput)
     truth2 = checkPolarity(userInput)
@@ -151,8 +179,22 @@ def sendClick():
             if (truth2 == True):
                 reply = "Well that does not seem very nice!"
             else:
-                reply = tryConverseWithSynonyms(userInput)
+                if (flag == True):
+                    temp = userInput.split(": ",1)[1]
+                    test = wikipedia.summary(temp, sentences = 2)
+                    reply = test
+                else:
+                    if (trigger == True):
+                        holder = userInput.split("# ",1)[1]
+                        translation = translator.translate(holder, dest="fr")
+                        reply = translation.text
+                    else:
+                        reply = tryConverseWithSynonyms(userInput)
     output = ""
+    userInput = translated.origin
+    rawTrans = translator.translate(reply, dest=OGlang)
+    if (trigger == False):
+        reply = rawTrans.text
     chatWin.configure(state="normal")
     if "To begin" in chatWin.get("1.0", END):
         chatWin.delete("1.0", END)
@@ -200,6 +242,7 @@ makeMenu()
 # these are conversation pairs
 pairs = [
     ['Hello|Hi', ['Hi, what is your name?']],
+    ['Can you define something for me?', ['Yes I can, just type a colon then add a space, then with the next words you type I will search the Wikipedia database for a definition']],
     ['my name is (.*)', ['Hello %1, my name is sports bot. Do you play any sports']],
     ['(.*) play (.*)', ['Thats so cool! I used to play %2 as well. Do you watch %2?']],
     ['yes, i watch (.*)', ['Who is your favourite player?']],

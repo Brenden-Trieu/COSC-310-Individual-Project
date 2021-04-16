@@ -81,7 +81,7 @@ Example:
 
                                                           Froot Loops is a brand of sweetened, fruit-flavored breakfast cereal produced by Kellogg's and sold in many countries. The cereal pieces are ring-shaped (hence "loops") and come in a variety of bright colors and a blend of fruit flavors (hence "froot", a cacography of fruit).
 
-Google Translate API
+Google Translate API was implemented as part of the individual project.  This API was implemented in such a way that it allows the chatbot to recognize phrases in languages that are not English.  The chatbot can recognize a user pair typed in French for example and it would be able to not only align it with the paired input but also respond in the typed language.  Additionally, the chatbot was also configured to also translate phrases from any language to French to also match with the Wikipedia API usage and to allow functionality with the traditional usage of a translator.
 
 Example:
 
